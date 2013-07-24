@@ -8,7 +8,9 @@ import net.thucydides.junit.annotations.Qualifier;
 import net.thucydides.junit.annotations.UseTestDataFrom;
 import net.thucydides.junit.runners.ThucydidesParameterizedRunner;
 import net.thucydides.junit.runners.ThucydidesRunner;
+import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -22,13 +24,10 @@ import thumbtack.steps.RegistrationSteps;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
-import static junit.framework.Assert.fail;
-
 
 @UseTestDataFrom(value="src/test/resource/users.csv",separator = ',')
 
 @RunWith(ThucydidesParameterizedRunner.class)
-//@RunWith(ThucydidesRunner.class)
 
 public class BaseTest {
 
@@ -103,26 +102,29 @@ public class BaseTest {
     }
     @BeforeClass
     public static void setUp() throws Exception {
-        serviceGC = new ChromeDriverService.Builder()
-                .usingDriverExecutable(new File("C:/Tools/Selenium/chromedriver.exe"))
-                .usingAnyFreePort()
-                .build();
-        serviceGC.start();
-//        serviceIE = new InternetExplorerDriverService.Builder()
-//                .usingDriverExecutable(new File("C:/Tools/Selenium/IEDriverServer.exe"))
+      System.setProperty("webdriver.chrome.driver", "C:/Tools/Selenium/chromedriver.exe");
+        System.setProperty("webdriver.ie.driver","IEDriverServer.exe");
+
+//        serviceGC = new ChromeDriverService.Builder()
+//                .usingDriverExecutable(new File("C:/Tools/Selenium/chromedriver.exe"))
 //                .usingAnyFreePort()
 //                .build();
-//        serviceIE.start();
-
-//        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-//        System.setProperty("webdriver.ie.driver","IEDriverServer.exe");
-
-//       driver = new RemoteWebDriver(serviceIE.getUrl(),
-//               DesiredCapabilities.internetExplorer());
-//                DesiredCapabilities.chrome());
+//        serviceGC.start();
 
 
-    }
+        serviceIE = new InternetExplorerDriverService.Builder()
+                .usingDriverExecutable(new File("C:/Tools/Selenium/IEDriverServer.exe"))
+                .usingAnyFreePort()
+                .build();
+        serviceIE.start();
+
+            driver = new RemoteWebDriver(serviceIE.getUrl(),
+              DesiredCapabilities.internetExplorer());
+ //                   DesiredCapabilities.chrome());
+
+        }
+
+
 
     @AfterClass
     public static void tearDown() throws Exception {
@@ -131,8 +133,8 @@ public class BaseTest {
         serviceIE.stop();
         }
 
-    @Managed(uniqueSession = true,driver = "chrome")
-    public static WebDriver driver;
+    @Managed(uniqueSession = true,driver = "firefox")
+    private static WebDriver driver;
 
 @ManagedPages(defaultUrl = "http://shakestir-dev.dev.thumbtack.net/")
 public Pages pages;

@@ -10,7 +10,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <thucydides.version>0.9.125</thucydides.version>
     <webdriver.driver>chrome</webdriver.driver>
-    <webdriver.driver>iexplorer</webdriver.driver>
+    <!--<webdriver.driver>iexplorer</webdriver.driver>-->
     <testname>**/BaseTest.java</testname>
     <testname>**/RegistrationTest.java</testname>
     </properties>
