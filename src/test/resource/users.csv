@@ -1,0 +1,4 @@
+firstName,lastName,name,email,password,re_password,gender,bMonth,bDay,bYear
+Kate,Frolova,efrolova,@thumbtack.net,usertest,usertest,F,4,12,1991
+Petia,Pupkin,petia,@gmail.com,usertest,usertest,M,12,31,1909
+Vasilisa,Vladimirovna,vasilisa,@yahoo.com,usertest,usertest,F,1,1,2013
